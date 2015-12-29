@@ -1,5 +1,5 @@
 mongodb:
-  image: triply/mongodb:3.2.0
+  image: triply/mongodb:3.2.0-1
   environment:
     - USERMAP_GID=1000
     - USERMAP_UID=1000

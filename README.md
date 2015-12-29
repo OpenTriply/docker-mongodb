@@ -1,4 +1,4 @@
-# triply/mongodb:3.2.0
+# triply/mongodb:3.2.0-1
 
 ## Introduction
 
@@ -8,7 +8,7 @@ This image however does not properly map the user and group ID of the mongodb us
 ## Quick start
 The quickest way to get started is using docker-compose.
 ```bash
-wget https://raw.githubusercontent.com/OpenTriply/docker-mongodb/3.2.0/docker-compose.yml
+wget https://raw.githubusercontent.com/OpenTriply/docker-mongodb/3.2.0-1/docker-compose.yml
 ```
 Start MongoDB using
 ```bash
