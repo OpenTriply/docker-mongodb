@@ -1,0 +1,29 @@
+#!/bin/bash
+set -e
+#print statements as they are executed
+[[ -n $DEBUG_ENTRYPOINT ]] && set -x
+
+
+source ${RUNTIME_DIR}/env-defaults
+
+## Execute a command as GITLAB_USER
+exec_as_main_user() {
+  sudo -HEu ${MAIN_USER} "$@"
+}
+
+
+map_uidgid() {
+  echo "Mapping UID/GID"
+  ## Adapt uid and gid for ${REDMINE_USER}:${REDMINE_USER}
+  USERMAP_ORIG_UID=$(id -u ${MAIN_USER})
+  USERMAP_ORIG_GID=$(id -g ${MAIN_USER})
+  USERMAP_GID=${USERMAP_GID:-${USERMAP_UID:-$USERMAP_ORIG_GID}}
+  USERMAP_UID=${USERMAP_UID:-$USERMAP_ORIG_UID}
+  if [[ ${USERMAP_UID} != ${USERMAP_ORIG_UID} ]] || [[ ${USERMAP_GID} != ${USERMAP_ORIG_GID} ]]; then
+    echo "Adapting uid and gid for ${MAIN_USER}:${MAIN_USER} to $USERMAP_UID:$USERMAP_GID"
+    groupmod -g ${USERMAP_GID} ${MAIN_USER}
+    sed -i -e "s/:${USERMAP_ORIG_UID}:${USERMAP_GID}:/:${USERMAP_UID}:${USERMAP_GID}:/" /etc/passwd
+  fi
+
+  # ownership is taken care of in regular entry file of base mongo image
+}

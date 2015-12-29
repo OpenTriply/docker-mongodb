@@ -1,0 +1,8 @@
+#!/bin/bash
+##WARNING: set environment variables that need to be accessible from outside this script
+#in the DockerFile
+
+#print statements as they are executed
+[[ -n $DEBUG_ENTRYPOINT ]] && set -x
+
+placeholder=
