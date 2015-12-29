@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 #print statements as they are executed
-[[ -n $DEBUG_ENTRYPOINT ]] && set -x
+[[ -n $DEBUG ]] && set -x
 source ${RUNTIME_DIR}/functions
 
 

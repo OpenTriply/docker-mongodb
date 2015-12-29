@@ -3,6 +3,7 @@
 #in the DockerFile
 
 #print statements as they are executed
-[[ -n $DEBUG_ENTRYPOINT ]] && set -x
+[[ -n $DEBUG ]] && set -x
 
-placeholder=
+USERMAP_UID=${USERMAP_UID:-1000}
+USERMAP_GID=${USERMAP_GID:-1000}
